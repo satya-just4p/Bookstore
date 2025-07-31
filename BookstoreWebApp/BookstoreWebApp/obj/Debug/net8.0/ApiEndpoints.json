@@ -1,0 +1,240 @@
+[
+  {
+    "ContainingType": "BookstoreWebApp.Controllers.AuthController",
+    "Method": "userLoginRequest",
+    "RelativePath": "api/Auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "_userLoginRequestDTO",
+        "Type": "BookstoreWebApp.Models.DTO.UserLoginRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookstoreWebApp.Controllers.AuthController",
+    "Method": "addUserRequest",
+    "RelativePath": "api/Auth/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "_addUserRequest",
+        "Type": "BookstoreWebApp.Models.DTO.AddUserRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookstoreWebApp.Controllers.AuthController",
+    "Method": "userPasswordResetRequest",
+    "RelativePath": "api/Auth/userPasswordReset",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "_userPasswordResetRequestDTO",
+        "Type": "BookstoreWebApp.Models.DTO.UserPasswordResetRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookstoreWebApp.Controllers.BooksController",
+    "Method": "getBookDetail",
+    "RelativePath": "api/Books/getBookDetail/{isbnNUmber}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "isbnNumber",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookstoreWebApp.Controllers.BooksController",
+    "Method": "getBooksSummary",
+    "RelativePath": "api/Books/getBooksSummary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookstoreWebApp.Controllers.UserController",
+    "Method": "deleteUserAccount",
+    "RelativePath": "api/User/deleteAccount/{userId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookstoreWebApp.Controllers.UserController",
+    "Method": "getUserDetailsRequest",
+    "RelativePath": "api/User/getUserDetails/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookstoreWebApp.Controllers.UserController",
+    "Method": "updateUserProfile",
+    "RelativePath": "api/User/updateProfile/{UserId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "_editUserRequestDTO",
+        "Type": "BookstoreWebApp.Models.DTO.EditUserRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookstoreWebApp.Controllers.UserBooksController",
+    "Method": "addNewBookRequest",
+    "RelativePath": "api/UserBooks/addNewBook",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "_addBookRequestDTO",
+        "Type": "BookstoreWebApp.Models.DTO.AddBookRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookstoreWebApp.Controllers.UserBooksController",
+    "Method": "deleteBook",
+    "RelativePath": "api/UserBooks/deleteBook/{isbnNumber}/{userId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "isbnNumber",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookstoreWebApp.Controllers.UserBooksController",
+    "Method": "getAllBooks",
+    "RelativePath": "api/UserBooks/getAllBooks/{UserId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookstoreWebApp.Controllers.UserBooksController",
+    "Method": "getUserBookDetail",
+    "RelativePath": "api/UserBooks/getUserBookDetail/{isbnNumber}/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "isbnNumber",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookstoreWebApp.Controllers.UserBooksController",
+    "Method": "updateBookDetail",
+    "RelativePath": "api/UserBooks/updateBook",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "_editBookRequestDTO",
+        "Type": "BookstoreWebApp.Models.DTO.EditBookRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BookstoreWebApp.Controllers.WeatherForecastController",
+    "Method": "Get",
+    "RelativePath": "WeatherForecast",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BookstoreWebApp.WeatherForecast, BookstoreWebApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetWeatherForecast"
+  }
+]
