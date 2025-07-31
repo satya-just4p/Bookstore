@@ -1,0 +1,71 @@
+<div class="register-wrapper">
+  <mat-card class="register-card">
+    <mat-card-header>
+      <mat-card-title class="title-center">Edit Profile</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form class="register-form">
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="half-width">
+                <mat-label>User Id</mat-label>
+                    <input matInput type="text" name="userId" id="userId"
+                    readonly [(ngModel)] = "this.userId"/>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>User Name</mat-label>
+            <input matInput type="text" name="userName" id="userName"
+            required [(ngModel)] ="editUserProfile.userName" />
+          </mat-form-field>
+
+          
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Phone</mat-label>
+            <input matInput type="tel" name="phone" id="phone"
+            required [(ngModel)] = "editUserProfile.phone" />
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Address</mat-label>
+          <textarea matInput rows="2" name="address" id="address"
+          required [(ngModel)] = "editUserProfile.address" ></textarea>
+        </mat-form-field>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Zip Code</mat-label>
+            <input matInput type="text" name="zipCode" id="zipCode"
+            required [(ngModel)] = "editUserProfile.zipCode" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>City</mat-label>
+            <input matInput type="text" name="city" id="city"
+            required [(ngModel)] = "editUserProfile.city" />
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Country</mat-label>
+          <input matInput type="text" name="country" id="country"
+          required [(ngModel)] = "editUserProfile.country" />
+        </mat-form-field>
+
+        <div class="button-row">
+            <button type="button" mat-raised-button color="primary" class="action-button" (click)="editUser()">
+                Edit Profile
+            </button>
+            <button type="button" mat-raised-button color="accent" class="action-button" (click)="goCancel()">
+                Cancel
+            </button>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

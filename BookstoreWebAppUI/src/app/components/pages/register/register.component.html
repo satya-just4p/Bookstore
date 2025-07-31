@@ -1,0 +1,69 @@
+<div class="register-wrapper">
+  <mat-card class="register-card">
+    <mat-card-header>
+      <mat-card-title class="title-center">Register for BookStoreApp</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form class="register-form" #form="ngForm" (ngSubmit)="registerUser()">
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>User Name</mat-label>
+            <input matInput type="text" name="UserName" id="UserName"
+            required [(ngModel)] = "addUserRequest.UserName"/>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Email Address</mat-label>
+            <input matInput type="email" name="EmailAddress" id="EmailAddress"
+            required [(ngModel)] = "addUserRequest.EmailAddress" />
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" name="Password" id="Password"
+            required [(ngModel)] = "addUserRequest.PasswordPlainText" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Phone</mat-label>
+            <input matInput type="number" name="Phone" id="Phone"
+            required [(ngModel)] = "addUserRequest.Phone" />
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Address</mat-label>
+          <textarea matInput rows="2" name="Address" id="Address"
+          [(ngModel)] = "addUserRequest.Address"></textarea>
+        </mat-form-field>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Zip Code</mat-label>
+            <input matInput type="text" name="ZipCode" id="ZipCode"
+            required [(ngModel)] = "addUserRequest.ZipCode" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>City</mat-label>
+            <input matInput type="text" name="City" id="City"
+            required [(ngModel)] = "addUserRequest.City" />
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Country</mat-label>
+          <input matInput type="text" name="Country" id="Country"
+          required [(ngModel)] = "addUserRequest.Country"/>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" class="full-width register-button" type="submit">
+          Register
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

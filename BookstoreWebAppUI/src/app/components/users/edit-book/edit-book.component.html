@@ -1,0 +1,78 @@
+<div class="register-wrapper">
+  <mat-card class="register-card">
+    <mat-card-header>
+      <mat-card-title class="title-center">Edit Book Detail</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form class="register-form" #form="ngForm">
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Book Id</mat-label>
+            <input matInput type="text" name="BookId" id="bookId"
+            required [(ngModel)] = "userBookDetail.bookId" readonly/>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Title</mat-label>
+            <input matInput type="text" name="title" id="title"
+            required [(ngModel)] = "userBookDetail.title"/>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Author</mat-label>
+            <input matInput type="text" name="author" id="author"
+            required [(ngModel)] = "userBookDetail.author" />
+          </mat-form-field>
+
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Book Synopsis</mat-label>
+          <textarea matInput rows="2" name="synopsis" id="synopsis"
+          [(ngModel)] = "userBookDetail.synopsis"></textarea>
+        </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Published On</mat-label>
+            <input matInput type="text" name="publishedOn" id="publishedOn"
+            required [(ngModel)] = "userBookDetail.publishedOn" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Book Price</mat-label>
+            <input matInput type="number" name="price" id="price"
+            required [(ngModel)] = "userBookDetail.price" />
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Published By</mat-label>
+          <textarea matInput rows="2" name="publishedBy" id="publishedBy"
+          [(ngModel)] = "userBookDetail.publishedBy"></textarea>
+        </mat-form-field>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>ISBN Number</mat-label>
+            <input matInput type="text" name="isbnNumber" id="isbnNumber"
+            required [(ngModel)] = "userBookDetail.isbnNumber" />
+          </mat-form-field>
+
+        </div>
+        <button mat-raised-button color="primary" class="full-width login-button" (click)="updateBookDetails()">
+          Update Details
+        </button>
+        <button *ngIf = "userId" mat-raised-button color="primary" class="full-width login-button" (click)="deleteBookRequest(userBookDetail.isbnNumber,this.userId)">
+          Delete
+        </button>
+        <button mat-raised-button color="primary" class="full-width login-button" (click)="goBack()">
+          Go Back my Uploaded Books Section
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+

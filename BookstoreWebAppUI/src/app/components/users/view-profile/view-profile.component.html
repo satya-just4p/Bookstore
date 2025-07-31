@@ -1,0 +1,82 @@
+<div class="register-wrapper">
+  <mat-card class="register-card">
+    <mat-card-header>
+      <mat-card-title class="title-center">View Profile</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form class="register-form">
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="half-width">
+                <mat-label>User Id</mat-label>
+                    <input matInput type="text" name = "userId" id="userId" 
+                    readonly [(ngModel)]="userDetails.userId"/>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>User Name</mat-label>
+            <input matInput type="text" name="userName" id="userName" 
+            readonly [(ngModel)] = "userDetails.userName" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Email Address</mat-label>
+            <input matInput type="email" name="emailAddress" id="emailAddress"
+            readonly [(ngModel)] = "userDetails.emailAddress" />
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Phone</mat-label>
+            <input matInput type="tel" name="phone" id="phone"
+            readonly [(ngModel)] = "userDetails.phone" />
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Address</mat-label>
+          <textarea matInput rows="2" name="address" id="address"
+          readonly [(ngModel)] = "userDetails.address"></textarea>
+        </mat-form-field>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Zip Code</mat-label>
+            <input matInput type="text" name="zipCode" id="zipCode"
+            readonly [(ngModel)] = "userDetails.zipCode" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>City</mat-label>
+            <input matInput type="text" name="city" id="city"
+            readonly [(ngModel)] = "userDetails.city" />
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Country</mat-label>
+          <input matInput type="text" name="country" id="country" 
+          readonly [(ngModel)] = "userDetails.country"/>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Created On</mat-label>
+          <input matInput type="date" name="createdOn" id="createdOn" 
+          readonly [(ngModel)] = "userDetails.createdOn"/>
+        </mat-form-field>
+
+      </form>
+
+      <div class="button-row">
+            <button type = "button" mat-raised-button color="primary" class="action-button" (click)="goEdit()">
+                Edit Profile
+            </button>
+            <button type="button" mat-raised-button color="accent" class="action-button" (click)="goBack()">
+                Back
+            </button>
+        </div>
+    </mat-card-content>
+  </mat-card>
+</div>

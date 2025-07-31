@@ -1,0 +1,32 @@
+<div class="books-list-wrapper">
+  <mat-toolbar color="primary" class="books-list-toolbar">
+    <span>My Books Section</span>
+  </mat-toolbar>
+
+  <div class="books-grid" *ngIf="bookSummary && bookSummary.length > 0">
+    <mat-card class="book-card" *ngFor="let booksList of bookSummary">
+      <mat-card-header>
+        <mat-card-title>Book Title {{ booksList.title }}</mat-card-title>
+        <mat-card-subtitle>Written by {{ booksList.author }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>Price {{ booksList.price}}</p>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <a mat-button color="accent" [routerLink]="['/view-detail',booksList.isbnNumber,this.userId]">
+          View Details
+        </a>
+        <a *ngIf = "userId" mat-button color="accent" 
+        (click)="deleteBookRequest(booksList.isbnNumber,this.userId)">
+          Delete this Book
+        </a>
+        <a mat-button color="accent" [routerLink]="['/edit-book',booksList.isbnNumber,this.userId]">
+          Edit Details
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <p *ngIf="!bookSummary || bookSummary.length<=0">No Records Found</p>
+</div>

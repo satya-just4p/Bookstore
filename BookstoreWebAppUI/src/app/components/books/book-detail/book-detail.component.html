@@ -1,0 +1,70 @@
+<div class="register-wrapper">
+  <mat-card class="register-card">
+    <mat-card-header>
+      <mat-card-title class="title-center">View Book Details</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form class="register-form" #form="ngForm">
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Book Id</mat-label>
+            <input matInput type="text" name="BookId" id="bookId"
+            required [(ngModel)] = "bookDetail.bookId" readonly/>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Title</mat-label>
+            <input matInput type="text" name="title" id="title"
+            required [(ngModel)] = "bookDetail.title" readonly/>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Author</mat-label>
+            <input matInput type="text" name="author" id="author"
+            required [(ngModel)] = "bookDetail.author" readonly />
+          </mat-form-field>
+
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Book Synopsis</mat-label>
+          <textarea matInput rows="2" name="synopsis" id="synopsis"
+          [(ngModel)] = "bookDetail.synopsis" readonly></textarea>
+        </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Published On</mat-label>
+            <input matInput type="text" name="publishedOn" id="publishedOn"
+            required [(ngModel)] = "bookDetail.publishedOn" readonly />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Book Price</mat-label>
+            <input matInput type="number" name="price" id="price"
+            required [(ngModel)] = "bookDetail.price" readonly />
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Published By</mat-label>
+          <textarea matInput rows="2" name="publishedBy" id="publishedBy"
+          [(ngModel)] = "bookDetail.publishedBy" readonly></textarea>
+        </mat-form-field>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>ISBN Number</mat-label>
+            <input matInput type="text" name="isbnNumber" id="isbnNumber"
+            required [(ngModel)] = "bookDetail.isbnNumber" readonly />
+          </mat-form-field>
+
+        </div>
+        <button mat-raised-button color="primary" class="full-width login-button" (click)="goBack()">
+          Back To The Books List
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

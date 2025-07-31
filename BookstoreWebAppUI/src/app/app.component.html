@@ -1,0 +1,16 @@
+<mat-toolbar class="navbar">
+  <span class="project-title">📘 BookStoreApp</span>
+
+  <a mat-button routerLink="/books-summary" routerLinkActive="active-link">View All Books</a>
+  <a *ngIf="!isLoggedIn" mat-button routerLink="/register" routerLinkActive="active-link">Register</a>
+  <a *ngIf="isLoggedIn" mat-button routerLink="/view-profile" routerLinkActive="active-link">View Profile</a>
+  <a *ngIf ="!isLoggedIn" mat-button routerLink="/login" routerLinkActive="active-link">Login</a>
+  <a *ngIf = "isLoggedIn" mat-button routerLink="/edit-password" routerLinkActive="active-link">Change Password</a>
+  <a *ngIf = "isLoggedIn" mat-button routerLink="/view-my-books" routerLinkActive="active-link">My Books Section</a>
+  <a *ngIf = "isLoggedIn" mat-button routerLink="/add-book" routerLinkActive="active-link">Upload a new Book</a>
+  <a *ngIf = "isLoggedIn" mat-button routerLinkActive="active-link" (click)="deleteAccount()">Delete My Account</a>
+  <a *ngIf = "isLoggedIn" mat-button routerLinkActive="active-link" (click)="logout()">Logout</a>
+  
+</mat-toolbar>
+
+<router-outlet></router-outlet>

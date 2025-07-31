@@ -1,0 +1,66 @@
+<div class="register-wrapper">
+  <mat-card class="register-card">
+    <mat-card-header>
+      <mat-card-title class="title-center">Upload New Book</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form class="register-form" #form="ngForm" (ngSubmit)="addNewBookRequest()">
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Title</mat-label>
+            <input matInput type="text" name="Title" id="Title"
+            required [(ngModel)] = "addBookRequest.Title"/>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Author</mat-label>
+            <input matInput type="email" name="Author" id="Author"
+            required [(ngModel)] = "addBookRequest.Author" />
+          </mat-form-field>
+
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Book Synopsis</mat-label>
+          <textarea matInput rows="2" name="Synopsis" id="Synopsis"
+          [(ngModel)] = "addBookRequest.Synopsis"></textarea>
+        </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Published On</mat-label>
+            <input matInput type="date" name="PublishedOn" id="PublishedOn"
+            required [(ngModel)] = "addBookRequest.PublishedOn" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Book Price</mat-label>
+            <input matInput type="number" name="Price" id="Price"
+            required [(ngModel)] = "addBookRequest.Price" />
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Published By</mat-label>
+          <textarea matInput rows="2" name="Address" id="Address"
+          [(ngModel)] = "addBookRequest.PublishedBy"></textarea>
+        </mat-form-field>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>ISBN Number</mat-label>
+            <input matInput type="text" name="ISBNNumber" id="ISBNNumber"
+            required [(ngModel)] = "addBookRequest.ISBNNumber" />
+          </mat-form-field>
+
+        </div>
+
+        <button mat-raised-button color="primary" class="full-width register-button" type="submit">
+          Add Book
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

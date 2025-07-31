@@ -1,0 +1,28 @@
+<div class="books-list-wrapper">
+  <mat-toolbar color="primary" class="books-list-toolbar">
+    <span>Books Summary</span>
+  </mat-toolbar>
+
+  <div class="books-grid" *ngIf="booksSummary && booksSummary.length > 0">
+    <mat-card class="book-card" *ngFor="let booksList of booksSummary">
+      <mat-card-header>
+        <mat-card-title>Book Title: {{ booksList.title }}</mat-card-title>
+        <mat-card-subtitle>Author: {{ booksList.author }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>ISBNNumber: {{ booksList.isbnNumber }}</p>
+      </mat-card-content>
+      <mat-card-content>
+        <p>Price: {{ booksList.price }}</p>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <a mat-button color="accent" [routerLink]="['/book-detail',booksList.isbnNumber]">
+          View Details
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <p *ngIf = "!booksSummary || booksSummary.length == 0">No Books Found</p>
+</div>
