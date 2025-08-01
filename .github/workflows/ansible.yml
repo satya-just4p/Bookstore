@@ -17,7 +17,7 @@ jobs:
 
     name: Run Ansible Playbooks
     runs-on: ubuntu-latest
-    
+
     defaults:
       run:
         working-directory: AnsibleBastionRDS
@@ -28,7 +28,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam::578160920339:role/github-actions-oidc-role
+          role-to-assume: arn:aws:iam::578160920339:role/bookstore-github-actions-oidc-role
           aws-region: $ {{ secrets.AWS_REGION}}
 
       - name: Get Bastion Host IP and Password
