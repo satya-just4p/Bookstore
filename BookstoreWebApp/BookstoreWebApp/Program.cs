@@ -153,7 +153,8 @@ app.UseHttpsRedirection();
 app.UseCors("AllowBookstoreCors");
 app.UseAuthentication(); // Newly added line for JWT Token Authentication
 app.UseAuthorization();
-
 app.MapControllers();
+
+app.MapGet("/",() => "Bookstore Welcomes you");
 
 app.Run();

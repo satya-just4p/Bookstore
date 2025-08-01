@@ -34,7 +34,7 @@ resource "aws_db_subnet_group" "bookstore_rds_subnet_group"{
     }
 }
 resource "aws_db_instance" "bookstore_db_instance"{
-    identifier = "BookstoreWebApp"
+    identifier = "bookstorewebapp"
     allocated_storage = 20
     engine = "sqlserver-ex"
     engine_version = "15.00.4073.23.v1"

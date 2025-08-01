@@ -16,7 +16,7 @@ resource "aws_s3_bucket" "tf_state_bucket"{
 
 resource "aws_dynamodb_table" "tf_lock_table"{
     name = var.lock_table_name
-    biiling_mode = "PAY_PER_REQUEST"
+    billing_mode = "PAY_PER_REQUEST"
 
     hash_key = "LockID"
 

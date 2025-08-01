@@ -137,12 +137,12 @@ resource "aws_s3_object" "bookstore_bastion_key_file"{
 # IAM role for EC2 instance to access S3 bucket for Private key
 resource "aws_iam_role" "bookstore_bastion_iam_role"{
     name = "bookstore-bastion-s3-access-role"
-    assume_policy = jsonencode({
+    assume_role_policy = jsonencode({
         Version = "2012-10-17",
         Statement = [{
             Action = "sts:AssumeRole",
             Effect = "Allow",
-            Prinicipal = {
+            Principal = {
                 Service = "ec2.amazonaws.com"
             }
         }]
@@ -157,13 +157,10 @@ resource "aws_iam_policy" "bookstore_bastion_s3_policy"{
     policy = jsonencode({
         Version = "2012-10-17",
         Statement = [{
-            Action = [
-                "s3:GetObject"
-            ],
+            Action = ["s3:GetObject"],
             Effect = "Allow",
-            Resource = {
-                "${aws_s3_bucket.bookstore_secure_key_bucket.arn}/*",
-            }
+            Resource = "${aws_s3_bucket.bookstore_secure_key_bucket.arn}/*"
+            
         }]
     })
 
@@ -185,19 +182,15 @@ resource "aws_iam_policy" "bookstore_bastion_ssm_access"{
         Version = "2012-10-17"
         Statement = [
         {
-            Sid = "AllowsBastionHostToAccessSSMParameters"
-            Action = [
-                "ssm:GetParameter"
-            ],
+            Sid = "AllowsBastionHostToAccessSSMParameters",
+            Action = ["ssm:GetParameter"],
             Effect = "Allow",
             Resource = "arn:aws:ssm:${var.aws_region}:${data.aws_caller_identity.current.account_id}:parameter/rds/*"
         },
         {
             Sid = "KMSDecrypt",
-            Effect = [
-                "kms:Decrypt"
-            ],
-            Action = "Allow",
+            Effect = "Allow",
+            Action = ["kms:Decrypt"],
             Resource = "*"
             # To implement least Privilege
             # Resource = "arn:aws:kms:${var.aws_region}:${data.aws_caller_identity.current.account_id}:key/alias/aws/ssm"
@@ -221,7 +214,7 @@ resource "aws_iam_instance_profile" "bookstore_bastion_instance_profile"{
 
 resource "aws_instance" "bookstore_bastion_instance"{
     subnet_id = aws_subnet.bookstore_public_subnet.id
-    ami_id = "ami-030a63c7124790810"
+    ami = "ami-030a63c7124790810"
     instance_type = "t2.micro"
 
     # Attaching the Instance Profile

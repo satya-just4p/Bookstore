@@ -1,0 +1,62 @@
+name: Angular CI Pipeline
+on:
+  workflow_run:
+    workflows:
+      - "Infrastructure CI Pipeline"
+    types:
+      - completed
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build:
+    if: >
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'main'
+    name: Build Angular App
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: BookstoreWebAppUI
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install -g @angular/cli
+
+      - name: Replace API URL in environment.prod.ts
+        run: sed -i "s|REPLACE_ME_BASE_URL|${{ secrets.api_url }}|g" ./src/environments/environment.prod.ts
+        working-directory: BookstoreWebAppUI
+
+      - name: Build Angular App
+        run: bg build --configuration production
+        working-directory: BookstoreWebAppUI
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.ANGULAR_CICD_USER_ROLE }}
+          aws-region: ${{ secrets.AWS_REGION}}
+
+      - name: Sync to S3 bucket
+        run: aws s3 sync ./dist/BookstoreWebAppUI/browser s3://${{ secrets.S3_BUCKET_NAME}} --delete
+
+      - name: Invalidate CloudFront Cache (Via AWS CLI)
+        run: |
+          aws cloudfront create-invalidation \
+          --distribution-id "${{ secrets.CLOUD_DISTRIBUTION_ID}}"\
+          --invalidation-batch '{
+          "Paths":{
+          "Quantity":1,
+          "Items":["/*"]
+          },
+          "CallerReference":"'$(date + %s)'"
+          }'

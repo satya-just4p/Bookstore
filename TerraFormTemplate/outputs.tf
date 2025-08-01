@@ -34,3 +34,18 @@ output "angular_cloudfront_distribution_id"{
     description = "Outputs the CloudFront Distribution Id"
     value = aws_cloudfront_distribution.bookstore_angular_cdn.id
 }
+
+output "bookstore_bastion_host_public_ip"{
+    description = "Outputs the Public Ip address of Bastion Host"
+    value = aws-instance.bookstore_bastion_instance.public_ip
+}
+
+output "bookstore_bastion_host_instance_id"{
+    description = "Outputs the Instance Id of the Bastion Host"
+    value = aws_instance.bookstore_bastion_instance.id
+}
+
+output "bookstore_rd_instance_endpoint"{
+    description = "Outputs the RDS endpoint"
+    value = aws_db_instance.bookstore_db_instance.address
+}

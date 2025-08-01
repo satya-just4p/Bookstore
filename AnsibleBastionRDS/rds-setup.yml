@@ -1,0 +1,48 @@
+- name: Configure SQL Server RDS
+  hosts: windows
+  gather_facts: no
+
+  vars:
+    rds_endpoint: "{{ lookup('env','RDS_HOST') }}"
+    rds_name: "{{ lookup('env','RDS_NAME') }}"
+    rds_username: "{{ lookup('env','RDS_USERNAME') }}"
+    rds_password: "{{ lookup('env','RDS_PASSWORD') }}"
+    sql_ScriptTable_Path: "C:\\Scripts\\CreateBookstoreTables.sql"
+
+  tasks:
+
+    - name: Creates Scripts folder on an EC2 Instance
+      win_file:
+        path: "C:\\Scripts"
+        state: directory
+
+    - name: Pause till directory is created
+      pause:
+        seconds: 30
+
+    - name: Uploads Table Schema File to EC2 Instance
+      win_copy:
+        src: "scripts/CreateBookstoreTables.sql"
+        dest: "{{ sql_ScriptTable_Path }}"
+
+    - name: Execute Create Database Command on Sqlcmd
+      win_shell: >
+        sqlcmd -S "{{ rds_endpoint }}" -U "{{ rds_username }}" -P "{{ rds_password }}" -Q "IF NOT EXISTS (select name from sys.databases where name = '{{ rds_name }}') BEGIN CREATE DATABASE [{{ rds_name }}] END"
+      register: sqlcmd_result
+      ignore_errors: true
+
+    - name: Execute Create Tables Scripts using sqlcmd
+      win_shell: >
+        sqlcmd -S "{{ rds_endpoint }}" -U "{{ rds_username }}" -P "{{ rds_password }}"
+        -d "{{ rds_name }}" -i "{{ sql_ScriptTable_Path }}"
+      register: sqlcmd_result
+      ignore_errors: true
+
+    - name: Display sqlcmd output
+      debug:
+        var: sqlcmd_result.stdout
+
+    - name: Fail gracefully if execution failed
+      fail:
+        msg: "Schema Execution failed. See Output above"
+      when: sqlcmd_result.rc != 0

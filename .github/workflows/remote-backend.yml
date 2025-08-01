@@ -1,0 +1,48 @@
+name: Remote-Backend for Terraform State
+on:
+  workflow_dispatch:
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terraform:
+    name: Apply Terraform Templates
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: TerraformTemplate/remote-backend
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform Template
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.8.4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::578160920339:role/github-actions-oidc-role
+          aws-region: ${{ secrets.aws_region }}
+
+      - name: Terraform init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+
+      - name: Terraform Outputs
+        run: |
+          echo "============== Remote-Backend Outputs ==============="
+          terraform output -json
+          echo "State S3 Bucket: $(terraform output -raw remote_state_bucket_name)"
+          echo "State Dynamodb Table name: $(terraform output -raw remote_state_lock_table)"

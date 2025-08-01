@@ -1,0 +1,118 @@
+name: Infrastructure CI Pipeline
+on:
+  workflow_run:
+    workflows:
+      - "Remote-Backend for Terraform State"
+    types:
+      - completed
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terraform:
+    if: >
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'main'
+
+    name: Apply Terraform Templates
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: TerraformTemplate
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.8.4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::578160920339:role/github-actions-oidc-role
+          aws-region: ${{ secrets.aws_region }}
+
+      - name: Terraform init
+        run: terraform init -reconfigure
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+
+      - name: Wait for Outputs to be ready
+        run: Sleep 2
+
+      - name: Install GitHub CLI
+        run: sudo apt-get update && sudo apt-get install gh -y
+
+      - name: Show Terraform Outputs
+        run: |
+          echo "============= Terraform Outputs ==================="
+          terraform output -json
+          
+      - name: Extract Terraform Outputs
+        id: extract
+        run: |
+          echo "bastion_host_ip=$(terraform output -raw bookstore_bastion_host_public_ip)" >> $GITHUB_OUTPUT
+          echo "bastion_host_instance_id=$(terraform output -raw bookstore_bastion_host_instance_id)" >> $GITHUB_OUTPUT
+
+      - name: Download .pem file from the S3 bucket
+        id: download_pem
+        run: |
+          aws s3 cp s3://bookstore-bastion-private-key.1981/bookstore-bastion-key.pem bookstore-bastion-key.pem
+          chmod 400 bookstore-bastion-key.pem
+
+      - name: Decrypt Bastion Windows Password
+        id: decrypt_pw
+        run: |
+          password=$(aws ec2 get-password-data \
+          --instance-id ${{ steps.extract.outputs.bastion_host_instance_id}} \
+          --priv-launch-key bookstore-bastion-key.pem \
+          --query 'PasswordData' \
+          --output text)
+          echo "password=$password" >> $GITHUB_OUTPUT
+
+      - name: Show Result (Debug Only)
+        run: |
+          echo "Bastion_IP:${{steps.extract.outputs.bastion_host_ip}}"
+          echo "Bastion_Password:${{ steps.decrypt_pw.outputs.password}}"
+
+      - name: Export Terraform Outputs as Secrets
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          BASTION_IP: ${{ steps.extract.outputs.bastion_host_ip}}
+          BASTION_PASSWORD: ${{ steps.decrypt_pw.outputs.password}}
+        run: |
+          echo "=========== Terraform Outputs ================"
+          cloudfront_distribution_id=$(terraform output -raw angular_cloudfront_distribution_id)
+          api_url=$(terraform output -raw angular_base_api_url)
+          s3_bucket_name=$(terraform output -raw s3_bucket_name)
+          aws_region=$(terraform output -raw bookstore_project_region)
+          angular_cicd_user_role=$(terraform output -raw github_actions_role_arn)
+
+          bastion_ip=$BASTION_IP
+          bastion_password=$BASTION_PASSWORD
+
+          if[ -z "$bastion_ip"] || [ -z "$bastion_password"];then
+            echo "Cannot save to GitHub Secrets. Bastion IP or Password is empty"
+            exit 1
+          fi
+
+          gh secret set CLOUD_DISTRIBUTION_ID -b "$cloudfront_distribution_id"
+          gh secret set API_URL -b "$api_url"
+          gh secret set S3_BUCKET_NAME -b "$s3_bucket_name"
+          gh secret set AWS_REGION -b "$aws_region"
+          gh secret set ANGULAR_CICD_USER_ROLE -b "$angular_cicd_user_role"
+          gh secret set BASTION_IP -b "$bastion_ip"
+          gh secret set BASTION_PASSWORD -b "$bastion_password"
+
+          echo "=============== GitHub Secrets Updated Successfully"

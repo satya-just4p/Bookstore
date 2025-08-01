@@ -89,7 +89,7 @@ resource "aws_vpc_security_group_ingress_rule" "bookstore_vpc_endpoint_ingress"{
     from_port = 443
     to_port = 443
     ip_protocol = "tcp"
-    referenced_security_group_id = "aws lambda security group"
+    referenced_security_group_id = aws_security_group.lambda_bookstore_sg.id
 }
 
 # Below code creates Interface Endpoint to enable

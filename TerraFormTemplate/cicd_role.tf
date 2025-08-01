@@ -17,7 +17,7 @@ data "aws_iam_openid_connect_provider" "bookstore_github"{
 resource "aws_iam_role" "bookstore_github_actions_role"{
     name = "bookstore-github-actions-role"
 
-    assume_policy = jsonencode({
+    assume_role_policy = jsonencode({
         Version = "2012-10-17"
         Statement = [{
             Action = [
@@ -53,8 +53,8 @@ resource "aws_iam_role_policy" "bookstore_cicd_user_inline_policy"{
                     "s3:ListBucket"
                 ],
                 Resource = [
-                    "arn:aws:s3:::${var.angular_s3_bucket_name.arn}/*",
-                    "arn:aws:s3:::${var.angular_s3_bucket_name.arn}"
+                    "arn:aws:s3:::${var.angular_s3_bucket_name}/*",
+                    "arn:aws:s3:::${var.angular_s3_bucket_name}"
                 ]
             },
             {

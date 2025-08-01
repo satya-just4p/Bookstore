@@ -4,14 +4,14 @@ variable "aws_region"{
 
 variable "angular_s3_bucket_name"{
     description = "S3 bucket name to host the Angular App"
-    type = "string"
+    type = string
     default = "bookstoreprojectbucket.1981"
 }
 
 # Below is the S3 bucket name that stores the Bastion Private key
 variable "bookstore_bastion_key"{
     description = "S3 bucket name that stores the bastion key private key"
-    type = "string"
+    type = string
     default = "bookstore-bastion-private-key.1981"
 }
 

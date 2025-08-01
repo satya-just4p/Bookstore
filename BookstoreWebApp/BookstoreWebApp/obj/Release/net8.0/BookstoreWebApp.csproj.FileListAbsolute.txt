@@ -148,3 +148,4 @@ D:\AWS\Projects\Bookstore\BookstoreWebApp\BookstoreWebApp\obj\Release\net8.0\ref
 D:\AWS\Projects\Bookstore\BookstoreWebApp\BookstoreWebApp\obj\Release\net8.0\BookstoreWebApp.pdb
 D:\AWS\Projects\Bookstore\BookstoreWebApp\BookstoreWebApp\obj\Release\net8.0\BookstoreWebApp.genruntimeconfig.cache
 D:\AWS\Projects\Bookstore\BookstoreWebApp\BookstoreWebApp\obj\Release\net8.0\ref\BookstoreWebApp.dll
+D:\AWS\Projects\Bookstore\BookstoreWebApp\BookstoreWebApp\obj\release\net8.0\BookstoreWebApp.sourcelink.json

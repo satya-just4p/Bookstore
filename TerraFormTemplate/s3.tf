@@ -15,7 +15,7 @@ resource "aws_s3_bucket_ownership_controls" "bookstore_object_ownership"{
     bucket = aws_s3_bucket.bookstore_angular_bucket.id
 
     rule{
-        object_ownserhip = "BucketOwnerEnforced"
+        object_ownership = "BucketOwnerEnforced"
     }
 }
 
