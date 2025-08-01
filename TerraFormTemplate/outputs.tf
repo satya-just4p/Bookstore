@@ -37,7 +37,7 @@ output "angular_cloudfront_distribution_id"{
 
 output "bookstore_bastion_host_public_ip"{
     description = "Outputs the Public Ip address of Bastion Host"
-    value = aws-instance.bookstore_bastion_instance.public_ip
+    value = aws_instance.bookstore_bastion_instance.public_ip
 }
 
 output "bookstore_bastion_host_instance_id"{
