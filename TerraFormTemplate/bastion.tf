@@ -129,7 +129,7 @@ resource "aws_s3_bucket_public_access_block" "bookstore_block_public_access"{
 # Storing the bastion private key in the S3 bucket
 resource "aws_s3_object" "bookstore_bastion_key_file"{
     bucket = aws_s3_bucket.bookstore_secure_key_bucket.id
-    key = "bookstore-bastion.key.pem"
+    key = "bookstore-bastion-key.pem"
     content = tls_private_key.bookstore_bastion_key.private_key_pem
     content_type = "text/plain"
 }
