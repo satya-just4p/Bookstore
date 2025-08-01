@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: TerraformTemplate/remote-backend
+        working-directory: TerraFormTemplate/remote-backend
 
     steps:
       - name: Checkout Code
