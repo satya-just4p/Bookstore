@@ -37,7 +37,7 @@ jobs:
         working-directory: BookstoreWebAppUI
 
       - name: Build Angular App
-        run: bg build --configuration production
+        run: ng build --configuration production
         working-directory: BookstoreWebAppUI
 
       - name: Configure AWS Credentials
