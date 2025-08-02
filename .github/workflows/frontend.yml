@@ -29,7 +29,11 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies
+      - name: Install Dependencies
+        run: npm install
+        working-directory: BookstoreWebAppUI
+
+      - name: Install Angular CLI
         run: npm install -g @angular/cli
 
       - name: Replace API URL in environment.prod.ts
