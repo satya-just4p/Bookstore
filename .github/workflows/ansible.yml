@@ -29,7 +29,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: arn:aws:iam::578160920339:role/bookstore-github-actions-oidc-role
-          aws-region: $ {{ secrets.AWS_REGION }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Get Bastion Host IP and Password
         shell: bash
