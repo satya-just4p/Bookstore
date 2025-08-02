@@ -29,7 +29,7 @@ resource "aws_iam_role" "bookstore_github_actions_role"{
             },
             Condition = {
                 StringEquals = {
-                    "token.actions.githubusercontent.com:sub" = "repo:satya-just4p/Bookstore"
+                    "token.actions.githubusercontent.com:sub" = "repo:satya-just4p/Bookstore:ref:refs/heads/main"
                 }
             }
         }]
