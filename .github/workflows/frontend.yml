@@ -51,7 +51,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION}}
 
       - name: Sync to S3 bucket
-        run: aws s3 sync ./dist/BookstoreWebAppUI/browser s3://${{ secrets.S3_BUCKET_NAME}} --delete
+        run: aws s3 sync ./dist/bookstore-web-app.ui/browser s3://${{ secrets.S3_BUCKET_NAME}} --delete
 
       - name: Invalidate CloudFront Cache (Via AWS CLI)
         run: |
