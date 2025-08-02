@@ -38,7 +38,7 @@ jobs:
           BASTION_HOST_PASSWORD: ${{ secrets.BASTION_PASSWORD }}
         run: |
           echo "Bastion_Host_IP: $BASTION_HOST_IP"
-          echo "Bastion_Host_Password: [REDACTED]"
+          echo "Bastion_Host_Password: $BASTION_HOST_PASSWORD"
           # Generate inventory.ini file for Ansible
           echo "[windows]" > inventory.ini
           echo "$BASTION_HOST_IP" >> inventory.ini
