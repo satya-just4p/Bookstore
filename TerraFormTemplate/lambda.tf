@@ -109,7 +109,7 @@ resource "aws_lambda_function" "bookstore_lambda_function"{
     environment {
         variables = {
             ASPNETCORE_ENVIRONMENT = "Development"
-            CORS_ALLOWED_ORIGINS = "Here comes the domain name of the cloud distribution"
+            CORS_ALLOWED_ORIGINS = aws_cloudfront_distribution.bookstore_angular_cdn.domain_name
         }
 
     }
