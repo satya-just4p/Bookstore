@@ -10,6 +10,8 @@ resource "aws_apigatewayv2_api" "bookstore_http_api"{
         expose_headers = ["*"]
         max_age = 3600
     }
+
+    depends_on = [aws_cloudfront_distribution.bookstore_angular_cdn]
 }
 
 # API Gateway Integration with AWS Lambda
