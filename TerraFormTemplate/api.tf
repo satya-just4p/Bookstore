@@ -2,6 +2,14 @@
 resource "aws_apigatewayv2_api" "bookstore_http_api"{
     name = "bookstore-http-api"
     protocol_type = "HTTP"
+
+    cors_configuration{
+        allow_origin = [aws_cloudfront_distribution.bookstore_angular_cdn.domain_name]
+        allow_headers = ["*"]
+        allow_methods = ["GET","PUT","POST","DELETE","OPTIONS"]
+        expose_headers = ["*"]
+        max_age = 3600
+    }
 }
 
 # API Gateway Integration with AWS Lambda
@@ -34,11 +42,5 @@ resource "aws_apigatewayv2_stage" "bookstore_stage"{
     name = "$default"
     auto_deploy = true
 
-    cors_configuration{
-        allow_origin = [aws_cloudfront_distribution.bookstore_angular_cdn.domain_name]
-        allow_headers = ["*"]
-        allow_methods = ["GET","PUT","POST","DELETE","OPTIONS"]
-        expose_headers = ["*"]
-        max_age = 3600
-    }
+    
 }
