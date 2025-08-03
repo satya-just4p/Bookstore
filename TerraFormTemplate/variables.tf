@@ -43,7 +43,7 @@ variable "ssm_db_username"{
 }
 
 variable "ssm_db_password"{
-    default = "B00kstorewebapp!2025$Xy"
+    default = "B00kstorewebapp2025Xy"
 }
 
 variable "ssm_db_name"{
