@@ -4,7 +4,7 @@ resource "aws_apigatewayv2_api" "bookstore_http_api"{
     protocol_type = "HTTP"
 
     cors_configuration{
-        allow_origin = [aws_cloudfront_distribution.bookstore_angular_cdn.domain_name]
+        allow_origins = [aws_cloudfront_distribution.bookstore_angular_cdn.domain_name]
         allow_headers = ["*"]
         allow_methods = ["GET","PUT","POST","DELETE","OPTIONS"]
         expose_headers = ["*"]
