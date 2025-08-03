@@ -33,4 +33,12 @@ resource "aws_apigatewayv2_stage" "bookstore_stage"{
     api_id = aws_apigatewayv2_api.bookstore_http_api.id
     name = "$default"
     auto_deploy = true
+
+    cors_configuration{
+        allow_origin = [aws_cloudfront_distribution.bookstore_angular_cdn.domain_name]
+        allow_headers = ["*"]
+        allow_methods = ["GET","PUT","POST","DELETE","OPTIONS"]
+        expose_headers = ["*"]
+        max_age = 3600
+    }
 }
