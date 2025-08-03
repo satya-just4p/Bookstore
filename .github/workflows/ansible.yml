@@ -81,7 +81,7 @@ jobs:
 
       - name: Ensures sqlcmd is installed
         run: |
-          ansible-playbook -i inventory.ini ensuresqlcmd.yml
+          ansible-playbook -i inventory.ini ensure-sqlcmd.yml
 
       - name: Configures Sql Server
         env:
