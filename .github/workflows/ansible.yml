@@ -43,7 +43,8 @@ jobs:
           echo "[windows]" > inventory.ini
           echo "$BASTION_HOST_IP" >> inventory.ini
           echo "[windows:vars]" >> inventory.ini
-          echo "ansible_user=Administor" >> inventory.ini
+          echo "ansible_user=Administrator" >> inventory.ini
+          echo "ansible_password=$BASTION_HOST_PASSWORD" >> inventory.ini
           echo "ansible_connection=winrm" >> inventory.ini
           echo "ansible_port=5985" >> inventory.ini
           echo "ansible_winrm_transport=basic" >> inventory.ini
